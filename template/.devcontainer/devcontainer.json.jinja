@@ -1,0 +1,28 @@
+{
+    "name": "{{ project_name }}",
+    "dockerComposeFile": "../docker-compose.yaml",
+    "service": "devcontainer",
+    "shutdownAction": "stopCompose",
+    "workspaceFolder": "/workdir",
+    "postStartCommand": "make install-pre-commit && cd engine && make sync"
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "johnpapa.vscode-peacock",
+                "charliermarsh.ruff",
+                "astral-sh.ty"
+            ],
+            "settings": {
+                "python.terminal.activateEnvironment": false,
+                "python.defaultInterpreterPath": "/workspaces/hive-game-ai/engine/.venv/bin/python3",
+                "ruff.interpreter": ["/workspaces/hive-game-ai/engine/.venv/bin/python3"],
+                "ty.interpreter": ["/workspaces/hive-game-ai/engine/.venv/bin/python3"],
+                "ty.inlayHints.callArgumentNames": false,
+                "ty.inlayHints.variableTypes": false,
+                "ty.completions.autoImport": false
+            }
+        }
+    }
+}

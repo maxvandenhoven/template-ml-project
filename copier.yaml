@@ -1,0 +1,23 @@
+project_name:
+  type: str
+  help: The name of the project (must match the git repo name for devcontainers to work) ...
+  default: "{{ _folder_name }}"
+
+package_name:
+  type: str
+  help: The name of the Python package with all pipeline logic ...
+  default: pipeline
+  validator: >-
+    {% if not (package_name | regex_search('^[a-z][a-z0-9-]*$')) %}
+    Package name may only contain lowercase letters, numbers, and hyphens.
+    {% endif %}
+
+enable_mlflow:
+  type: bool
+  help: Whether to provide a Docker-based installation of MLflow for experiment tracking ...
+  default: true
+
+_subdirectory: template
+
+_exclude:
+  - "{% if enable_mlflow is false %}mlflow{%endif%}"
