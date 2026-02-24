@@ -4,7 +4,7 @@
     "service": "devcontainer",
     "shutdownAction": "stopCompose",
     "workspaceFolder": "/workdir",
-    "postStartCommand": "make install-pre-commit && cd engine && make sync",
+    "postStartCommand": "make install-pre-commit && cd {{ package_name }} && make sync",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -16,9 +16,9 @@
             ],
             "settings": {
                 "python.terminal.activateEnvironment": false,
-                "python.defaultInterpreterPath": "/workspaces/hive-game-ai/engine/.venv/bin/python3",
-                "ruff.interpreter": ["/workspaces/hive-game-ai/engine/.venv/bin/python3"],
-                "ty.interpreter": ["/workspaces/hive-game-ai/engine/.venv/bin/python3"],
+                "python.defaultInterpreterPath": "/workspaces/{{ project_name }}/{{ package_name }}/.venv/bin/python3",
+                "ruff.interpreter": ["/workspaces/{{ project_name }}/{{ package_name }}/.venv/bin/python3"],
+                "ty.interpreter": ["/workspaces/{{ project_name }}/{{ package_name }}/.venv/bin/python3"],
                 "ty.inlayHints.callArgumentNames": false,
                 "ty.inlayHints.variableTypes": false,
                 "ty.completions.autoImport": false
