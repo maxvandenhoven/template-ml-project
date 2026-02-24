@@ -1,0 +1,45 @@
+name: {{ project_name }}
+
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: {{ project_name }}-devcontainer
+    container_name: devcontainer
+    stdin_open: true 
+    tty: true
+    networks: [internal]
+
+  mlflow:
+    build:
+      context: mlflow
+      dockerfile: Dockerfile
+    image: {{ project_name }}-mlflow
+    container_name: mlflow
+    entrypoint: 
+      - "uv"
+      - "run"
+      - "mlflow"
+      - "server"
+      - "--host"
+      - "0.0.0.0"
+      - "--backend-store-uri"
+      - "sqlite:///mlbackend/mlflow.db"
+      - "--disable-security-middleware"  # TODO: specify localhost and devcontainer host.
+    ports:
+      - 5000:5000
+    networks: [internal]
+    volumes:
+      - mlflow-artifacts-data:/mlartifacts
+      - mlflow-backend-data:/mlbackend
+      - mlflow-runs-data:/mlruns
+
+volumes:
+  mlflow-artifacts-data:
+  mlflow-backend-data:
+  mlflow-runs-data:
+
+networks:
+  internal:
+    driver: bridge
