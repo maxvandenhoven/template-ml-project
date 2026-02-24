@@ -15,4 +15,4 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 EXPOSE 5000
 
 # Copy uv project files so uv knows to install MLflow.
-COPY uv.lock pyproject.toml /workdir/
+COPY pyproject.toml /workdir/
