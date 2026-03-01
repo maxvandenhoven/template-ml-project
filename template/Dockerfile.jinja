@@ -1,6 +1,6 @@
 # Start from a slim python base image to keep the container size as small as possible.
 FROM python:3.13-slim
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.10.5 /uv /uvx /bin/
 
 # Set the working directory for consistent paths in notebooks/tests.
 WORKDIR /workspaces/{{ project_name }}
